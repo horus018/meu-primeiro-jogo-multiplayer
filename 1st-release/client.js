@@ -16,28 +16,37 @@ function createGame() {
     function movePlayer(command){
         console.log(`Moving ${command.playerId} with ${command.keyPressed}`)
 
+        const acceptedMoves = {
+            w(player){
+                if(player.y - 1 >= 0){
+                    player.y = player.y - 1
+                }
+            },
+            d(player){
+                if(player.x + 1 < screen.width){
+                    player.x = player.x + 1
+                }
+            },
+            s(player){
+                if(player.y + 1 < screen.height){
+                    player.y = player.y + 1
+                }
+            },
+            a(player){
+                if(player.x - 1 >= 0){
+                    player.x = player.x - 1
+                }
+            }
+        }
+
         const player = state.players[currentPlayerId]
         const keyPressed = command.keyPressed
+        const moveFunction = acceptedMoves[keyPressed]
 
-        if(keyPressed === 'w' && player.y - 1 >= 0){
-            player.y = player.y - 1
-            return
+        if(moveFunction){
+            moveFunction(player)
         }
-    
-        if(keyPressed === 'a' && player.x - 1 >= 0){
-            player.x = player.x - 1
-            return
-        }
-    
-        if(keyPressed === 's' && player.y + 1 < screen.height){
-            player.y = player.y + 1
-            return
-        }
-    
-        if(keyPressed === 'd' && player.x + 1 < screen.width){
-            player.x = player.x + 1
-            return
-        }
+        return
     }
 
     return {
