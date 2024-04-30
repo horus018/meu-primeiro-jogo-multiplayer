@@ -8,3 +8,15 @@ keyboardListener.subscribe(game.movePlayer)
 
 const screen = $('#screen').get(0)
 renderScreen(screen, game, requestAnimationFrame)
+
+const socket = io()
+
+socket.on('connect', () => {
+    const playerId = socket.id
+    console.log(`> Player connected on Client with id: ${playerId}`)
+    socket.on('setup', (state) => {
+        console.log(`Receiving "setup" event from server`)
+        console.log(state)
+        game.state = state
+    })
+})
