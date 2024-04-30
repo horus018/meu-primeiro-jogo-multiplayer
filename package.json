@@ -1,0 +1,19 @@
+{
+  "name": "meu-primeiro-jogo-multiplayer",
+  "version": "1.0.0",
+  "description": "Parou em 13:42 no video do filipe https://www.youtube.com/watch?v=P5kfA6ncOs8&t=185s",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "http": "^0.0.1-security",
+    "path": "^0.12.7",
+    "server.js": "^1.0.0",
+    "url": "^0.11.3"
+  }
+}
