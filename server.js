@@ -10,19 +10,23 @@ const sockets = new Server(server)
 app.use(express.static('public'))
 
 const game = createGame()
-game.addPlayer({playerId: 'player1', playerX: 0, playerY: 0})
-game.addFruit({fruitId: 'fruit1', fruitX: 1, fruitY: 2})
-
-game.movePlayer({playerId: 'player1', keyPressed: 's'})
-
-console.log(game.state)
 
 sockets.on('connection', (socket) => {
     const playerId = socket.id
-    console.log(`> Player connected on Server with id: ${playerId}`)
+    console.log(`> Player connected: ${playerId}`)
+
+    game.addPlayer({playerId: playerId})
+    // console.log(game.state)
 
     socket.emit('setup', game.state)
+
+    socket.on('disconnect', () => {
+        game.removePlayer({playerId: playerId})
+        console.log(`> Player disconnected: ${playerId}`)
+    })
 })
+
+
 
 server.listen(3000, () => {
     console.log('> Server is running on port 3000')

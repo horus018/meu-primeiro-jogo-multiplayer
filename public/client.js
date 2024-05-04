@@ -14,9 +14,8 @@ const socket = io()
 socket.on('connect', () => {
     const playerId = socket.id
     console.log(`> Player connected on Client with id: ${playerId}`)
-    socket.on('setup', (state) => {
-        console.log(`Receiving "setup" event from server`)
-        console.log(state)
-        game.state = state
-    })
+})
+
+socket.on('setup', (state) => {
+    game.setState(state)
 })
